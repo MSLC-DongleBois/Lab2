@@ -1,33 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16G29" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="y9u-la-6vj">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16G29" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="ZtI-Ze-GcZ">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
-        <scene sceneID="tne-QT-ifu">
-            <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
-                        <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC" customClass="GLKView">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                    </view>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="370" y="387"/>
-        </scene>
-        <!--Table View Controller-->
+        <!--Lab 2 - Audio Lab-->
         <scene sceneID="UKy-Ob-b5Q">
             <objects>
                 <tableViewController id="y9u-la-6vj" sceneMemberID="viewController">
@@ -45,7 +28,7 @@
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Frequency" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="lbR-8u-bXt">
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Max Frequency" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="lbR-8u-bXt">
                                                     <rect key="frame" x="15" y="0.0" width="345" height="43.5"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
@@ -65,7 +48,7 @@
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Doppler" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="5rt-sJ-KKu">
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Doppler Effect" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="5rt-sJ-KKu">
                                                     <rect key="frame" x="15" y="0.0" width="345" height="43.5"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
@@ -86,10 +69,27 @@
                             <outlet property="delegate" destination="y9u-la-6vj" id="rqM-wQ-IqU"/>
                         </connections>
                     </tableView>
+                    <navigationItem key="navigationItem" title="Lab 2 - Audio Lab" id="qTD-gN-KkJ"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9xC-Id-wJ4" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1247" y="386"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="FHj-mf-Fjm">
+            <objects>
+                <navigationController id="ZtI-Ze-GcZ" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="Bsp-Me-uwH">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="y9u-la-6vj" kind="relationship" relationship="rootViewController" id="0cS-7s-btB"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dv9-0a-9Tu" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="414" y="-273"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="4ZX-t4-qre">
@@ -102,12 +102,54 @@
                     <view key="view" contentMode="scaleToFill" id="Ueu-50-pHF">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Freq 1" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9r3-vB-7NZ">
+                                <rect key="frame" x="38" y="96" width="47" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Freq 2" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MBC-Yg-8cf">
+                                <rect key="frame" x="281" y="96" width="49" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9Kd-On-TCr">
+                                <rect key="frame" x="164" y="318" width="46" height="30"/>
+                                <state key="normal" title="Button"/>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Hz" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BLE-Uq-5Jf">
+                                <rect key="frame" x="63" y="125" width="21.5" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Hz" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OYc-6p-A40">
+                                <rect key="frame" x="308" y="125" width="21.5" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="9r3-vB-7NZ" firstAttribute="top" secondItem="LZ3-cN-5XC" secondAttribute="bottom" constant="32" id="36e-dz-Wwt"/>
+                            <constraint firstItem="BLE-Uq-5Jf" firstAttribute="top" secondItem="9r3-vB-7NZ" secondAttribute="bottom" constant="8" id="MKm-ng-GgC"/>
+                            <constraint firstItem="9Kd-On-TCr" firstAttribute="centerY" secondItem="Ueu-50-pHF" secondAttribute="centerY" id="aSZ-6w-l62"/>
+                            <constraint firstItem="9Kd-On-TCr" firstAttribute="centerX" secondItem="Ueu-50-pHF" secondAttribute="centerX" id="c4g-qe-9RA"/>
+                            <constraint firstItem="MBC-Yg-8cf" firstAttribute="leading" secondItem="9r3-vB-7NZ" secondAttribute="trailing" constant="196" id="fEc-gZ-f87"/>
+                            <constraint firstItem="9r3-vB-7NZ" firstAttribute="leading" secondItem="Ueu-50-pHF" secondAttribute="leadingMargin" constant="22" id="oW4-FD-GSv"/>
+                            <constraint firstItem="MBC-Yg-8cf" firstAttribute="top" secondItem="LZ3-cN-5XC" secondAttribute="bottom" constant="32" id="ofv-1P-HLB"/>
+                            <constraint firstItem="BLE-Uq-5Jf" firstAttribute="leading" secondItem="Ueu-50-pHF" secondAttribute="leadingMargin" constant="47" id="phc-kJ-iNp"/>
+                            <constraint firstItem="OYc-6p-A40" firstAttribute="top" secondItem="MBC-Yg-8cf" secondAttribute="bottom" constant="8" id="sDj-Pv-lDc"/>
+                            <constraint firstItem="OYc-6p-A40" firstAttribute="leading" secondItem="BLE-Uq-5Jf" secondAttribute="trailing" constant="223.5" id="xZ4-I1-3RP"/>
+                        </constraints>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="m88-U0-Dhc" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2206" y="0.0"/>
+            <point key="canvasLocation" x="2205.5999999999999" y="-0.44977511244377816"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="vHC-Ma-dMA">
