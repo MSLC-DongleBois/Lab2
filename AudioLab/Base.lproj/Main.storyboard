@@ -91,10 +91,10 @@
             </objects>
             <point key="canvasLocation" x="414" y="-273"/>
         </scene>
-        <!--View Controller-->
+        <!--Frequency Detector-->
         <scene sceneID="4ZX-t4-qre">
             <objects>
-                <viewController id="zMd-4b-30Y" sceneMemberID="viewController">
+                <viewController title="Frequency Detector" id="zMd-4b-30Y" customClass="FreqViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="LZ3-cN-5XC"/>
                         <viewControllerLayoutGuide type="bottom" id="LaS-1Y-oIZ"/>
@@ -116,8 +116,11 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9Kd-On-TCr">
-                                <rect key="frame" x="164" y="318" width="46" height="30"/>
-                                <state key="normal" title="Button"/>
+                                <rect key="frame" x="172" y="318" width="30" height="30"/>
+                                <state key="normal" title="Play"/>
+                                <connections>
+                                    <action selector="buttonPressed:" destination="zMd-4b-30Y" eventType="touchUpInside" id="yAY-Yt-5uG"/>
+                                </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Hz" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BLE-Uq-5Jf">
                                 <rect key="frame" x="63" y="125" width="21.5" height="21"/>
@@ -146,15 +149,19 @@
                             <constraint firstItem="OYc-6p-A40" firstAttribute="leading" secondItem="BLE-Uq-5Jf" secondAttribute="trailing" constant="223.5" id="xZ4-I1-3RP"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="Freq1Label" destination="BLE-Uq-5Jf" id="Wpp-a5-UvN"/>
+                        <outlet property="playPause" destination="9Kd-On-TCr" id="VKz-AG-reH"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="m88-U0-Dhc" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2205.5999999999999" y="-0.44977511244377816"/>
         </scene>
-        <!--View Controller-->
+        <!--Dope-ler-->
         <scene sceneID="vHC-Ma-dMA">
             <objects>
-                <viewController id="D9n-hR-ldI" sceneMemberID="viewController">
+                <viewController title="Dope-ler" id="D9n-hR-ldI" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="S7z-KH-Tiw"/>
                         <viewControllerLayoutGuide type="bottom" id="0W8-5Z-v9X"/>
