@@ -11,7 +11,8 @@
 #import "CircularBuffer.h"
 #import "FFTHelper.h"
 
-#define BUFFER_SIZE 264600
+//buffer must be a power of two
+#define BUFFER_SIZE 8192
 
 @interface FreqViewController ()
 @property (strong, nonatomic) Novocaine *audioManager;
@@ -52,13 +53,26 @@
 
 #pragma mark VC Life Cycle
 - (void)viewDidLoad {
+    
     [super viewDidLoad];
+    
     // Do any additional setup after loading the view, typically from a nib.
     
     __block FreqViewController * __weak  weakSelf = self;
+    
     [self.audioManager setInputBlock:^(float *data, UInt32 numFrames, UInt32 numChannels)
     {
-        [weakSelf.buffer addNewFloatData:data withNumSamples:numFrames];
+        if(numChannels > 1) {
+            float* arrayData = malloc(sizeof(float)*BUFFER_SIZE);
+            for(int i =numFrames*numChannels; i>=0;i-=2) {
+                arrayData[i/2] = data[i];
+            }
+            [weakSelf.buffer addNewFloatData:arrayData withNumSamples:numFrames];
+            free(arrayData);
+        }
+        else {
+            [weakSelf.buffer addNewFloatData:data withNumSamples:numFrames];
+        }
     }];
     
     [self.audioManager play];
@@ -77,16 +91,13 @@
     
     [self.buffer fetchFreshData:arrayData withNumSamples:BUFFER_SIZE];
     
-    [self.fftHelper performForwardFFTWithData:arrayData
-                   andCopydBMagnitudeToBuffer:fftMagnitude];
+    [self.fftHelper performForwardFFTWithData:arrayData andCopydBMagnitudeToBuffer:fftMagnitude];
     
     float maxVal = 0.0;
     vDSP_Length indexLoc = 0;
     vDSP_maxvi(fftMagnitude, 1, &maxVal, &indexLoc, BUFFER_SIZE/2);
     
-    
-    //WRONG
-    _Freq1Label.text = [NSString stringWithFormat:@"%lu", (indexLoc * 6)];
+    _Freq1Label.text = [NSString stringWithFormat:@"%.2f", (((float)indexLoc) * self.audioManager.samplingRate/((float)BUFFER_SIZE))];
     
     
     free(arrayData);
