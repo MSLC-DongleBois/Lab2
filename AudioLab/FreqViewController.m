@@ -76,12 +76,23 @@
     }];
     
     [self.audioManager play];
+    
+    [NSTimer scheduledTimerWithTimeInterval:.3
+                                     target:self
+                                   selector:@selector(continuousFFT:)
+                                   userInfo:nil
+                                    repeats:YES];
 }
 
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+-(void) continuousFFT: (NSTimer*) t
+{
+    [self getNewFFT];
 }
 
 - (void) getNewFFT
@@ -97,15 +108,25 @@
     vDSP_Length indexLoc = 0;
     vDSP_maxvi(fftMagnitude, 1, &maxVal, &indexLoc, BUFFER_SIZE/2);
     
+    for (int i = 1; i < (BUFFER_SIZE/2) - 1; i++)
+    {
+        // here, we're checking for a center peak
+        if (fftMagnitude[i] > fftMagnitude[i - 1] && fftMagnitude[i] > fftMagnitude[i + 1])
+        {
+            // if we find a center peak, store it in an array
+            
+        }
+        
+
+    }
+    
+    
     _Freq1Label.text = [NSString stringWithFormat:@"%.2f", (((float)indexLoc) * self.audioManager.samplingRate/((float)BUFFER_SIZE))];
     
     
     free(arrayData);
     free(fftMagnitude);
 }
-- (IBAction)buttonPressed:(id)sender {
-    
-    [self getNewFFT];
-}
+
 
 @end
