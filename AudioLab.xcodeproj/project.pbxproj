@@ -19,6 +19,7 @@
 		B6BD9E591D6E43140009AB3F /* CircularBuffer.m in Sources */ = {isa = PBXBuildFile; fileRef = B6BD9E581D6E43140009AB3F /* CircularBuffer.m */; };
 		B6BD9E5B1D6E46790009AB3F /* satisfaction.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = B6BD9E5A1D6E46790009AB3F /* satisfaction.mp3 */; };
 		B6BD9E641D6F4BA90009AB3F /* FFTHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = B6BD9E631D6F4BA90009AB3F /* FFTHelper.m */; };
+		D91DB8421F736B290007E96F /* DopplerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D91DB8411F736B290007E96F /* DopplerViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -62,6 +63,8 @@
 		B6BD9E5A1D6E46790009AB3F /* satisfaction.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = satisfaction.mp3; sourceTree = "<group>"; };
 		B6BD9E621D6F4BA90009AB3F /* FFTHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FFTHelper.h; path = AudioDSPUtils/FFTHelper.h; sourceTree = "<group>"; };
 		B6BD9E631D6F4BA90009AB3F /* FFTHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FFTHelper.m; path = AudioDSPUtils/FFTHelper.m; sourceTree = "<group>"; };
+		D91DB8401F736B290007E96F /* DopplerViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DopplerViewController.h; sourceTree = "<group>"; };
+		D91DB8411F736B290007E96F /* DopplerViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DopplerViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -118,6 +121,8 @@
 				B6BD9E261D6E384A0009AB3F /* Main.storyboard */,
 				027CA7E31F6EFF40000714C3 /* FreqViewController.h */,
 				027CA7E41F6EFF40000714C3 /* FreqViewController.m */,
+				D91DB8401F736B290007E96F /* DopplerViewController.h */,
+				D91DB8411F736B290007E96F /* DopplerViewController.m */,
 				B6BD9E291D6E384A0009AB3F /* Assets.xcassets */,
 				B6BD9E2B1D6E384A0009AB3F /* LaunchScreen.storyboard */,
 				B6BD9E2E1D6E384A0009AB3F /* Info.plist */,
@@ -300,6 +305,7 @@
 			files = (
 				B6BD9E591D6E43140009AB3F /* CircularBuffer.m in Sources */,
 				B6BD9E641D6F4BA90009AB3F /* FFTHelper.m in Sources */,
+				D91DB8421F736B290007E96F /* DopplerViewController.m in Sources */,
 				B6BD9E531D6E398F0009AB3F /* Novocaine.m in Sources */,
 				027CA7E51F6EFF40000714C3 /* FreqViewController.m in Sources */,
 				B6BD9E221D6E384A0009AB3F /* AppDelegate.m in Sources */,
