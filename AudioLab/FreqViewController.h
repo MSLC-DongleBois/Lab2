@@ -10,4 +10,6 @@
 
 @interface FreqViewController : UIViewController
 @property (weak, nonatomic) IBOutlet UILabel *Freq1Label;
+@property (weak, nonatomic) IBOutlet UILabel *Freq2Label;
+
 @end
