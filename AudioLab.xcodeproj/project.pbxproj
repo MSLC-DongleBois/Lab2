@@ -20,8 +20,7 @@
 		B6BD9E5B1D6E46790009AB3F /* satisfaction.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = B6BD9E5A1D6E46790009AB3F /* satisfaction.mp3 */; };
 		B6BD9E641D6F4BA90009AB3F /* FFTHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = B6BD9E631D6F4BA90009AB3F /* FFTHelper.m */; };
 		D91DB8421F736B290007E96F /* DopplerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D91DB8411F736B290007E96F /* DopplerViewController.m */; };
-		FBC765671F7553DE000FE7E0 /* SMUGraphHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = FBC765661F7553DE000FE7E0 /* SMUGraphHelper.m */; };
-		FBC7656D1F755A4B000FE7E0 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FBC7656C1F755A4B000FE7E0 /* ViewController.m */; };
+		D97BFD551F758DEB001EA0B6 /* SMUGraphHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = D97BFD541F758DEB001EA0B6 /* SMUGraphHelper.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -67,10 +66,8 @@
 		B6BD9E631D6F4BA90009AB3F /* FFTHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FFTHelper.m; path = AudioDSPUtils/FFTHelper.m; sourceTree = "<group>"; };
 		D91DB8401F736B290007E96F /* DopplerViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DopplerViewController.h; sourceTree = "<group>"; };
 		D91DB8411F736B290007E96F /* DopplerViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DopplerViewController.m; sourceTree = "<group>"; };
-		FBC765651F7553DE000FE7E0 /* SMUGraphHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SMUGraphHelper.h; sourceTree = "<group>"; };
-		FBC765661F7553DE000FE7E0 /* SMUGraphHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SMUGraphHelper.m; sourceTree = "<group>"; };
-		FBC7656B1F755A4A000FE7E0 /* ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		FBC7656C1F755A4B000FE7E0 /* ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		D97BFD531F758DEB001EA0B6 /* SMUGraphHelper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SMUGraphHelper.h; sourceTree = "<group>"; };
+		D97BFD541F758DEB001EA0B6 /* SMUGraphHelper.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SMUGraphHelper.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -122,12 +119,10 @@
 		B6BD9E1C1D6E384A0009AB3F /* AudioLab */ = {
 			isa = PBXGroup;
 			children = (
-				FBC7656B1F755A4A000FE7E0 /* ViewController.h */,
-				FBC7656C1F755A4B000FE7E0 /* ViewController.m */,
-				FBC765651F7553DE000FE7E0 /* SMUGraphHelper.h */,
-				FBC765661F7553DE000FE7E0 /* SMUGraphHelper.m */,
 				B6BD9E201D6E384A0009AB3F /* AppDelegate.h */,
 				B6BD9E211D6E384A0009AB3F /* AppDelegate.m */,
+				D97BFD531F758DEB001EA0B6 /* SMUGraphHelper.h */,
+				D97BFD541F758DEB001EA0B6 /* SMUGraphHelper.m */,
 				B6BD9E261D6E384A0009AB3F /* Main.storyboard */,
 				027CA7E31F6EFF40000714C3 /* FreqViewController.h */,
 				027CA7E41F6EFF40000714C3 /* FreqViewController.m */,
@@ -313,11 +308,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				FBC765671F7553DE000FE7E0 /* SMUGraphHelper.m in Sources */,
 				B6BD9E591D6E43140009AB3F /* CircularBuffer.m in Sources */,
 				B6BD9E641D6F4BA90009AB3F /* FFTHelper.m in Sources */,
+				D97BFD551F758DEB001EA0B6 /* SMUGraphHelper.m in Sources */,
 				D91DB8421F736B290007E96F /* DopplerViewController.m in Sources */,
-				FBC7656D1F755A4B000FE7E0 /* ViewController.m in Sources */,
 				B6BD9E531D6E398F0009AB3F /* Novocaine.m in Sources */,
 				027CA7E51F6EFF40000714C3 /* FreqViewController.m in Sources */,
 				B6BD9E221D6E384A0009AB3F /* AppDelegate.m in Sources */,

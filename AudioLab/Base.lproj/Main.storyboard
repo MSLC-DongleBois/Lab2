@@ -102,46 +102,63 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Frequency 1" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9r3-vB-7NZ">
-                                <rect key="frame" x="160.66666666666666" y="132" width="93" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Frequency 1:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9r3-vB-7NZ">
+                                <rect key="frame" x="155" y="113" width="104.66666666666669" height="21"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Frequency 2" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MBC-Yg-8cf">
-                                <rect key="frame" x="159.33333333333334" y="273" width="95.333333333333314" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Frequency 2:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MBC-Yg-8cf">
+                                <rect key="frame" x="153.66666666666669" y="208" width="107.00000000000006" height="21"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Hz" textAlignment="natural" lineBreakMode="characterWrap" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BLE-Uq-5Jf">
-                                <rect key="frame" x="196.33333333333334" y="161" width="21.333333333333314" height="21"/>
+                                <rect key="frame" x="196.33333333333334" y="142" width="21.333333333333314" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Hz" textAlignment="natural" lineBreakMode="characterWrap" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OYc-6p-A40">
-                                <rect key="frame" x="196.33333333333337" y="302" width="21.666666666666657" height="21"/>
+                                <rect key="frame" x="196.33333333333337" y="237" width="21.666666666666657" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Lock-In Frequency:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="61x-D7-mde">
+                                <rect key="frame" x="128.33333333333337" y="294" width="157.66666666666663" height="21"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="5qf-Q8-tPh">
+                                <rect key="frame" x="182.66666666666666" y="329" width="51" height="31"/>
+                                <connections>
+                                    <action selector="getLockState:" destination="zMd-4b-30Y" eventType="valueChanged" id="Kk3-iG-aYZ"/>
+                                </connections>
+                            </switch>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="MBC-Yg-8cf" firstAttribute="top" secondItem="BLE-Uq-5Jf" secondAttribute="bottom" constant="91" id="5BO-AE-S2E"/>
+                            <constraint firstItem="MBC-Yg-8cf" firstAttribute="top" secondItem="BLE-Uq-5Jf" secondAttribute="bottom" constant="45" id="5BO-AE-S2E"/>
                             <constraint firstItem="OYc-6p-A40" firstAttribute="centerX" secondItem="Ueu-50-pHF" secondAttribute="centerX" id="7Ig-W2-eUT"/>
+                            <constraint firstItem="61x-D7-mde" firstAttribute="centerX" secondItem="Ueu-50-pHF" secondAttribute="centerX" id="LkU-ck-wtI"/>
                             <constraint firstItem="BLE-Uq-5Jf" firstAttribute="top" secondItem="9r3-vB-7NZ" secondAttribute="bottom" constant="8" id="MZx-Q2-qMm"/>
+                            <constraint firstItem="5qf-Q8-tPh" firstAttribute="centerX" secondItem="Ueu-50-pHF" secondAttribute="centerX" id="Pdh-6J-em4"/>
                             <constraint firstItem="9r3-vB-7NZ" firstAttribute="centerX" secondItem="Ueu-50-pHF" secondAttribute="centerX" id="TsW-fy-BvI"/>
-                            <constraint firstItem="9r3-vB-7NZ" firstAttribute="top" secondItem="LZ3-cN-5XC" secondAttribute="bottom" constant="68" id="ap0-g8-RHf"/>
+                            <constraint firstItem="5qf-Q8-tPh" firstAttribute="top" secondItem="61x-D7-mde" secondAttribute="bottom" constant="14" id="VB1-LM-c7g"/>
+                            <constraint firstItem="9r3-vB-7NZ" firstAttribute="top" secondItem="LZ3-cN-5XC" secondAttribute="bottom" constant="49" id="ap0-g8-RHf"/>
                             <constraint firstItem="MBC-Yg-8cf" firstAttribute="centerX" secondItem="Ueu-50-pHF" secondAttribute="centerX" id="meF-GQ-hu4"/>
                             <constraint firstItem="BLE-Uq-5Jf" firstAttribute="centerX" secondItem="Ueu-50-pHF" secondAttribute="centerX" id="o0S-jX-MYK"/>
                             <constraint firstItem="OYc-6p-A40" firstAttribute="top" secondItem="MBC-Yg-8cf" secondAttribute="bottom" constant="8" id="vSd-TV-RTZ"/>
+                            <constraint firstItem="61x-D7-mde" firstAttribute="top" secondItem="OYc-6p-A40" secondAttribute="bottom" constant="36" id="zxP-Oy-Xiz"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="Freq1Label" destination="BLE-Uq-5Jf" id="Wpp-a5-UvN"/>
                         <outlet property="Freq2Label" destination="OYc-6p-A40" id="g4g-RF-xCM"/>
+                        <outlet property="lockFreq" destination="5qf-Q8-tPh" id="UAE-Cw-axA"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="m88-U0-Dhc" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -151,7 +168,6 @@
         <!--Dope-ler-->
         <scene sceneID="vHC-Ma-dMA">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="2X6-lW-TCq" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <viewController title="Dope-ler" id="D9n-hR-ldI" customClass="DopplerViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="S7z-KH-Tiw"/>
@@ -180,7 +196,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Microphone Read:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="alh-eN-Sap">
-                                <rect key="frame" x="138" y="196" width="139" height="21"/>
+                                <rect key="frame" x="137.66666666666669" y="196" width="139.00000000000006" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
@@ -198,7 +214,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Not gesturing" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XM1-OU-4YL">
-                                <rect key="frame" x="155" y="308" width="105" height="21"/>
+                                <rect key="frame" x="154.66666666666669" y="308" width="105.00000000000006" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
@@ -230,6 +246,7 @@
                         <outlet property="micFreqLabel" destination="1Yf-KX-KdT" id="1fa-TB-cAQ"/>
                     </connections>
                 </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="2X6-lW-TCq" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2019" y="667"/>
         </scene>
