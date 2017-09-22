@@ -7,8 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <GLKit/GLKit.h>
 
-@interface DopplerViewController : UIViewController
+@interface DopplerViewController : GLKViewController
 
 @property (weak, nonatomic) IBOutlet UISlider *freqSlider;
 @property (weak, nonatomic) IBOutlet UILabel *freqSliderLabel;

@@ -9,16 +9,17 @@
 #import "DopplerViewController.h"
 #import "Novocaine.h"
 #import "CircularBuffer.h"
+#import "SMUGraphHelper.h"
 #import "FFTHelper.h"
-#import "TGSineWaveToneGenerator.h"
 
-#define BUFFER_SIZE 8192
+#define BUFFER_SIZE 2048*4
 
 @interface DopplerViewController ()
 @property (strong, nonatomic) Novocaine *audioManager;
 @property (strong, nonatomic) CircularBuffer *buffer;
+@property (strong, nonatomic) SMUGraphHelper *graphHelper;
 @property (strong, nonatomic) FFTHelper *fftHelper;
-@property (strong, nonatomic) TGSineWaveToneGenerator *generator;
+@property (nonatomic) float frequency;
 
 @end
 
@@ -43,6 +44,17 @@
     return _buffer;
 }
 
+-(SMUGraphHelper*)graphHelper{
+    if(!_graphHelper){
+        _graphHelper = [[SMUGraphHelper alloc]initWithController:self
+                                        preferredFramesPerSecond:15
+                                                       numGraphs:1
+                                                       plotStyle:PlotStyleSeparated
+                                               maxPointsPerGraph:BUFFER_SIZE];
+    }
+    return _graphHelper;
+}
+
 -(FFTHelper*)fftHelper
 {
     if(!_fftHelper)
@@ -53,23 +65,14 @@
     return _fftHelper;
 }
 
--(TGSineWaveToneGenerator*)generator
-{
-    if(!_generator)
-    {
-        _generator = [[TGSineWaveToneGenerator alloc] initWithChannels:1];
-    }
-
-    return _generator;
-}
-
 - (void)viewDidLoad {
     [super viewDidLoad];
     
     // Do any additional setup after loading the view, typically from a nib.
     
+    [self.graphHelper setScreenBoundsBottomHalf];
+    
     __block DopplerViewController * __weak  weakSelf = self;
-
     [self.audioManager setInputBlock:^(float *data, UInt32 numFrames, UInt32 numChannels)
      {
          if(numChannels > 1) {
@@ -84,60 +87,88 @@
              [weakSelf.buffer addNewFloatData:data withNumSamples:numFrames];
          }
      }];
+    
+    self.frequency = self.freqSlider.value;
 
     [self.audioManager play];
-    
-    [NSTimer scheduledTimerWithTimeInterval:.5
-                                     target:self
-                                   selector:@selector(continuousFFT:)
-                                   userInfo:nil
-                                    repeats:YES];
 }
 
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear: animated];
     
-    self.generator->_channels[0].frequency = self.freqSlider.value;
-    [self.generator play];
+    [self playAudio];
+}
+
+- (void) playAudio {    
+    __block DopplerViewController * __weak  weakSelf = self;
+    [self.audioManager setOutputBlock:^(float *data, UInt32 numFrames, UInt32 numChannels)
+     {
+         __block float phase = 0.0;
+         __block float samplingRate = weakSelf.audioManager.samplingRate;
+         [weakSelf.audioManager setOutputBlock:^(float *data, UInt32 numFrames, UInt32 numChannels)
+          {
+              double phaseIncrement = 2*M_PI*self.frequency/samplingRate;
+              double sineWaveRepeatMax = 2*M_PI;
+              for (int i=0; i < numFrames; ++i)
+              {
+                  data[i] = sin(phase);
+                  phase += phaseIncrement;
+                  if (phase >= sineWaveRepeatMax) phase -= sineWaveRepeatMax;
+              }
+          }];
+     }];
 }
 
 - (void)viewWillDisappear:(BOOL)animated
 {
     [super viewWillDisappear: animated];
-    
-    [self.generator stop];
+    [self.audioManager pause];
 }
 
--(void) continuousFFT: (NSTimer*) t
-{
-    [self getNewFFT];
-}
+#pragma mark GLK Inherited Functions
+//  override the GLKViewController update function, from OpenGLES
+- (void)update{
+    // just plot the audio stream
 
-- (void) getNewFFT
-{
-    float* fftMagnitude = malloc(sizeof(float)*BUFFER_SIZE/2);
+    // get audio stream data
     float* arrayData = malloc(sizeof(float)*BUFFER_SIZE);
-    
+    float* fftMagnitude = malloc(sizeof(float)*BUFFER_SIZE/2);
+
     [self.buffer fetchFreshData:arrayData withNumSamples:BUFFER_SIZE];
-    
-    [self.fftHelper performForwardFFTWithData:arrayData andCopydBMagnitudeToBuffer:fftMagnitude];
+
+    // take forward FFT
+    [self.fftHelper performForwardFFTWithData:arrayData
+                   andCopydBMagnitudeToBuffer:fftMagnitude];
+
+    // graph the FFT Data
+    [self.graphHelper setGraphData:fftMagnitude+(14000*BUFFER_SIZE/44100)
+                    withDataLength:BUFFER_SIZE/2*.317
+                     forGraphIndex:0
+                 withNormalization:300.0
+                     withZeroValue:-20];
+
+    [self.graphHelper update]; // update the graph
     
     float maxVal = 0.0;
     vDSP_Length indexLoc = 0;
     vDSP_maxvi(fftMagnitude, 1, &maxVal, &indexLoc, BUFFER_SIZE/2);
-    
-    
-    _micFreqLabel.text = [NSString stringWithFormat:@"%.2f", (((float)indexLoc) * self.audioManager.samplingRate/((float)BUFFER_SIZE))];
+
+    _micFreqLabel.text = [NSString stringWithFormat:@"%.2f Hz", (((float)indexLoc) * self.audioManager.samplingRate/((float)BUFFER_SIZE))];
     
     free(arrayData);
     free(fftMagnitude);
 }
 
+//  override the GLKView draw function, from OpenGLES
+- (void)glkView:(GLKView *)view drawInRect:(CGRect)rect {
+    [self.graphHelper draw]; // draw the graph
+}
+
 - (IBAction)sliderValueChanged:(id)sender {
     self.freqSliderLabel.text = [NSString stringWithFormat:@"%.0f Hz", self.freqSlider.value];
     
-    self.generator->_channels[0].frequency = self.freqSlider.value;
+    self.frequency = self.freqSlider.value;
 }
 
 /*
