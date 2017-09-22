@@ -20,12 +20,13 @@
 @property (strong, nonatomic) Novocaine *audioManager;
 @property (strong, nonatomic) CircularBuffer *buffer;
 @property (strong, nonatomic) FFTHelper *fftHelper;
-@property (strong, nonatomic) NSMutableArray *magArray;
+@property (nonatomic) float peak1;
+@property (nonatomic) float peak2;
+@property (nonatomic) BOOL freqLocked;
 @end
 
 @implementation FreqViewController
 
-@synthesize magArray = _magArray;
 
 #pragma mark Lazy Instantiation
 -(Novocaine*)audioManager
@@ -54,16 +55,6 @@
     }
     
     return _fftHelper;
-}
-
--(NSMutableArray*) magArray
-{
-    if(!_magArray)
-    {
-        _magArray = [[NSMutableArray alloc] initWithCapacity:NUM_PEAKS];
-    }
-    
-    return _magArray;
 }
 
 #pragma mark VC Life Cycle
@@ -97,6 +88,7 @@
                                    selector:@selector(continuousFFT:)
                                    userInfo:nil
                                     repeats:YES];
+    
 }
 
 - (void)didReceiveMemoryWarning
@@ -109,6 +101,12 @@
 {
     [self getNewFFT];
 }
+
+- (IBAction)getLockState:(UISwitch *)sender {
+    self.freqLocked = sender.isOn;
+    return;
+}
+
 
 - (void) getNewFFT
 {
@@ -141,7 +139,10 @@
         if (fftMagnitude[i] > currentMax && fftMagnitude[i-1] < fftMagnitude[i] && fftMagnitude[i+1] < fftMagnitude[i])
         {
             int poss = i;
-            if (poss != idx1)
+            int dist = idx1 - poss;
+            
+            // Calcuate the distance between two peaks. It has to be at least 8 bins/indices apart.
+            if (dist > 8)
             {
                 currentMax = fftMagnitude[i];
                 idx2 = poss;
@@ -149,16 +150,38 @@
         }
     }
     
+    
     float buff = (float)BUFFER_SIZE;
     float rate = (float)self.audioManager.samplingRate;
 
     float first, second;
-
+    
     first = ((idx1 * rate)/buff);
     second = ((idx2 * rate)/buff);
     
-    _Freq1Label.text = [NSString stringWithFormat:@"%.2f Hz", first];
-    _Freq2Label.text = [NSString stringWithFormat:@"%.2f Hz", second];
+    // If the frequency lock is ON
+    if (self.freqLocked)
+    {
+        if (first > self.peak1) {
+            self.peak1 = first;
+            _Freq1Label.text = [NSString stringWithFormat:@"%.2f Hz", first];
+        }
+        
+        if (second > self.peak2) {
+            self.peak2 = second;
+            _Freq2Label.text = [NSString stringWithFormat:@"%.2f Hz", second];
+        }
+    }
+    
+    // If the frequency lock is OFF
+    else if (self.freqLocked == false)
+    {
+        self.peak1 = first;
+        self.peak2 = second;
+        
+        _Freq1Label.text = [NSString stringWithFormat:@"%.2f Hz", first];
+        _Freq2Label.text = [NSString stringWithFormat:@"%.2f Hz", second];
+    }
 
     free(arrayData);
     free(fftMagnitude);

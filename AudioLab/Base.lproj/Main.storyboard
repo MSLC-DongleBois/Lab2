@@ -132,8 +132,11 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="8iD-mq-dDy">
+                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="8iD-mq-dDy">
                                 <rect key="frame" x="182.66666666666666" y="358" width="51" height="31"/>
+                                <connections>
+                                    <action selector="getLockState:" destination="zMd-4b-30Y" eventType="valueChanged" id="ioE-XF-RSF"/>
+                                </connections>
                             </switch>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -155,6 +158,7 @@
                     <connections>
                         <outlet property="Freq1Label" destination="BLE-Uq-5Jf" id="Wpp-a5-UvN"/>
                         <outlet property="Freq2Label" destination="OYc-6p-A40" id="g4g-RF-xCM"/>
+                        <outlet property="lockFreq" destination="8iD-mq-dDy" id="OTe-hX-Pn9"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="m88-U0-Dhc" userLabel="First Responder" sceneMemberID="firstResponder"/>
