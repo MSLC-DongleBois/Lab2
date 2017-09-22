@@ -102,38 +102,51 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Frequency 1" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9r3-vB-7NZ">
-                                <rect key="frame" x="160.66666666666666" y="132" width="93" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Frequency 1:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9r3-vB-7NZ">
+                                <rect key="frame" x="156" y="113" width="102.33333333333331" height="21"/>
+                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Frequency 2" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MBC-Yg-8cf">
-                                <rect key="frame" x="159.33333333333334" y="273" width="95.333333333333314" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Frequency 2:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MBC-Yg-8cf">
+                                <rect key="frame" x="155" y="217" width="104.33333333333331" height="21"/>
+                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Hz" textAlignment="natural" lineBreakMode="characterWrap" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BLE-Uq-5Jf">
-                                <rect key="frame" x="196.33333333333334" y="161" width="21.333333333333314" height="21"/>
+                                <rect key="frame" x="196.33333333333334" y="142" width="21.333333333333314" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Hz" textAlignment="natural" lineBreakMode="characterWrap" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OYc-6p-A40">
-                                <rect key="frame" x="196.33333333333337" y="302" width="21.666666666666657" height="21"/>
+                                <rect key="frame" x="196.33333333333337" y="246" width="21.666666666666657" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Lock-In Frequencies:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="07y-Jj-kcm">
+                                <rect key="frame" x="123.33333333333331" y="318" width="167.33333333333337" height="21"/>
+                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="8iD-mq-dDy">
+                                <rect key="frame" x="182.66666666666666" y="358" width="51" height="31"/>
+                            </switch>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="MBC-Yg-8cf" firstAttribute="top" secondItem="BLE-Uq-5Jf" secondAttribute="bottom" constant="91" id="5BO-AE-S2E"/>
+                            <constraint firstItem="8iD-mq-dDy" firstAttribute="centerX" secondItem="Ueu-50-pHF" secondAttribute="centerX" id="3U0-I0-to1"/>
+                            <constraint firstItem="MBC-Yg-8cf" firstAttribute="top" secondItem="BLE-Uq-5Jf" secondAttribute="bottom" constant="54" id="5BO-AE-S2E"/>
+                            <constraint firstItem="07y-Jj-kcm" firstAttribute="top" secondItem="OYc-6p-A40" secondAttribute="bottom" constant="51" id="65n-3Q-p2C"/>
                             <constraint firstItem="OYc-6p-A40" firstAttribute="centerX" secondItem="Ueu-50-pHF" secondAttribute="centerX" id="7Ig-W2-eUT"/>
+                            <constraint firstItem="07y-Jj-kcm" firstAttribute="centerX" secondItem="Ueu-50-pHF" secondAttribute="centerX" id="8n4-En-w6h"/>
                             <constraint firstItem="BLE-Uq-5Jf" firstAttribute="top" secondItem="9r3-vB-7NZ" secondAttribute="bottom" constant="8" id="MZx-Q2-qMm"/>
                             <constraint firstItem="9r3-vB-7NZ" firstAttribute="centerX" secondItem="Ueu-50-pHF" secondAttribute="centerX" id="TsW-fy-BvI"/>
-                            <constraint firstItem="9r3-vB-7NZ" firstAttribute="top" secondItem="LZ3-cN-5XC" secondAttribute="bottom" constant="68" id="ap0-g8-RHf"/>
+                            <constraint firstItem="8iD-mq-dDy" firstAttribute="top" secondItem="07y-Jj-kcm" secondAttribute="bottom" constant="19" id="WII-yu-nXA"/>
+                            <constraint firstItem="9r3-vB-7NZ" firstAttribute="top" secondItem="LZ3-cN-5XC" secondAttribute="bottom" constant="49" id="ap0-g8-RHf"/>
                             <constraint firstItem="MBC-Yg-8cf" firstAttribute="centerX" secondItem="Ueu-50-pHF" secondAttribute="centerX" id="meF-GQ-hu4"/>
                             <constraint firstItem="BLE-Uq-5Jf" firstAttribute="centerX" secondItem="Ueu-50-pHF" secondAttribute="centerX" id="o0S-jX-MYK"/>
                             <constraint firstItem="OYc-6p-A40" firstAttribute="top" secondItem="MBC-Yg-8cf" secondAttribute="bottom" constant="8" id="vSd-TV-RTZ"/>
