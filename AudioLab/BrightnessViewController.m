@@ -1,29 +1,26 @@
 //
-//  DopplerViewController.m
+//  BrightnessViewController.m
 //  AudioLab
 //
-//  Created by Austin Chen on 9/20/17.
+//  Created by Austin Chen on 9/22/17.
 //  Copyright © 2017 Eric Larson. All rights reserved.
 //
 
-#import "DopplerViewController.h"
+#import "BrightnessViewController.h"
 #import "Novocaine.h"
 #import "CircularBuffer.h"
-#import "SMUGraphHelper.h"
 #import "FFTHelper.h"
 
 #define BUFFER_SIZE 2048*4
 
-@interface DopplerViewController ()
+@interface BrightnessViewController ()
 @property (strong, nonatomic) Novocaine *audioManager;
 @property (strong, nonatomic) CircularBuffer *buffer;
-@property (strong, nonatomic) SMUGraphHelper *graphHelper;
 @property (strong, nonatomic) FFTHelper *fftHelper;
 @property (nonatomic) float frequency;
-
 @end
 
-@implementation DopplerViewController
+@implementation BrightnessViewController
 
 #pragma mark Lazy Instantiation
 -(Novocaine*)audioManager
@@ -44,17 +41,6 @@
     return _buffer;
 }
 
--(SMUGraphHelper*)graphHelper{
-    if(!_graphHelper){
-        _graphHelper = [[SMUGraphHelper alloc]initWithController:self
-                                        preferredFramesPerSecond:15
-                                                       numGraphs:1
-                                                       plotStyle:PlotStyleSeparated
-                                               maxPointsPerGraph:BUFFER_SIZE];
-    }
-    return _graphHelper;
-}
-
 -(FFTHelper*)fftHelper
 {
     if(!_fftHelper)
@@ -65,14 +51,11 @@
     return _fftHelper;
 }
 
+
 - (void)viewDidLoad {
-    [super viewDidLoad];
-    
     // Do any additional setup after loading the view, typically from a nib.
     
-    [self.graphHelper setScreenBoundsBottomHalf];
-    
-    __block DopplerViewController * __weak  weakSelf = self;
+    __block BrightnessViewController * __weak  weakSelf = self;
     [self.audioManager setInputBlock:^(float *data, UInt32 numFrames, UInt32 numChannels)
      {
          if(numChannels > 1) {
@@ -88,9 +71,22 @@
          }
      }];
     
-    self.frequency = self.freqSlider.value;
-
+    self.frequency = 20000;
+    
+    [[UIScreen mainScreen] setBrightness:0];
+    
+    [NSTimer scheduledTimerWithTimeInterval:.1
+                                     target:self
+                                   selector:@selector(continuousFFT:)
+                                   userInfo:nil
+                                    repeats:YES];
+    
     [self.audioManager play];
+}
+
+-(void) continuousFFT: (NSTimer*) t
+{
+    [self getNewFFT];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -100,8 +96,10 @@
     [self playAudio];
 }
 
-- (void) playAudio {    
-    __block DopplerViewController * __weak  weakSelf = self;
+
+
+- (void) playAudio {
+    __block BrightnessViewController * __weak  weakSelf = self;
     [self.audioManager setOutputBlock:^(float *data, UInt32 numFrames, UInt32 numChannels)
      {
          __block float phase = 0.0;
@@ -120,44 +118,25 @@
      }];
 }
 
-- (void)viewWillDisappear:(BOOL)animated
-{
-    [super viewWillDisappear: animated];
-    [self.audioManager pause];
-}
-
-#pragma mark GLK Inherited Functions
-//  override the GLKViewController update function, from OpenGLES
-- (void)update{
+- (void) getNewFFT{
     // just plot the audio stream
-
+    
     // get audio stream data
     float* arrayData = malloc(sizeof(float)*BUFFER_SIZE);
     float* fftMagnitude = malloc(sizeof(float)*BUFFER_SIZE/2);
-
+    
     [self.buffer fetchFreshData:arrayData withNumSamples:BUFFER_SIZE];
-
+    
     // take forward FFT
     [self.fftHelper performForwardFFTWithData:arrayData
                    andCopydBMagnitudeToBuffer:fftMagnitude];
-
-    // graph the FFT Data
-    [self.graphHelper setGraphData:fftMagnitude+(14000*BUFFER_SIZE/44100)
-                    withDataLength:BUFFER_SIZE/2*.317
-                     forGraphIndex:0
-                 withNormalization:300.0
-                     withZeroValue:-20];
-
-    [self.graphHelper update]; // update the graph
     
     float playedFreqBin = self.frequency / (self.audioManager.samplingRate/(BUFFER_SIZE));
     int playedFreqIndex = round(playedFreqBin);
-    
-    _micFreqLabel.text = [NSString stringWithFormat:@"%.2f Hz", (((float)playedFreqIndex) * self.audioManager.samplingRate/((float)BUFFER_SIZE))];
-    
+
     float leftMagnitude = 0.0;
     float rightMagnitude = 0.0;
-
+    
     // We are searching for the cumulative magnitudes to the left of the frequency. First, we must aggregate every frequency 8 buckets to
     // the LEFT of the index that is currently playing
     for (int i = playedFreqIndex - 8; i < playedFreqIndex; i++)
@@ -169,37 +148,49 @@
     for (int i = playedFreqIndex + 1; i < playedFreqIndex + 9; i++) {
         rightMagnitude += fftMagnitude[i];
     }
-
+    
     // If the difference between the two magnitudes is less than 50, we are going to ignore the motion.
     // We ignore it because there is no meaningful difference between the two.
     if(fabs(leftMagnitude - rightMagnitude) < 60)
     {
-        self.gestureLabel.text = @"Not gesturing";
+        [[UIScreen mainScreen] setBrightness:0.4];
+        self.peekabooLabel.text = @"";
+        self.emojiLabel.text = @"🙈";
     }
     
-    else if(leftMagnitude > rightMagnitude)
+    // Motion away
+    else if (leftMagnitude > rightMagnitude)
     {
-        self.gestureLabel.text = @"Motion away";
-    }
-    else if(leftMagnitude < rightMagnitude)
-    {
-        self.gestureLabel.text = @"Motion towards";
-    }
+        [[UIScreen mainScreen] setBrightness:0.4];
+        self.peekabooLabel.text = @"";
 
+        self.emojiLabel.text = @"🙈";
+    }
+    
+    // Motion towards
+    else if (leftMagnitude < rightMagnitude)
+    {
+        [[UIScreen mainScreen] setBrightness:1];
+        self.emojiLabel.text = @"🐵";
+        self.peekabooLabel.text = @"Peekaboo!";
+
+    }
+    
     // Free up the data
     free(arrayData);
     free(fftMagnitude);
 }
 
-//  override the GLKView draw function, from OpenGLES
-- (void)glkView:(GLKView *)view drawInRect:(CGRect)rect {
-    [self.graphHelper draw]; // draw the graph
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear: animated];
+    [[UIScreen mainScreen] setBrightness:0.7];
+    [self.audioManager pause];
 }
 
-- (IBAction)sliderValueChanged:(id)sender {
-    self.freqSliderLabel.text = [NSString stringWithFormat:@"%.0f Hz", self.freqSlider.value];
-    
-    self.frequency = self.freqSlider.value;
+- (void)didReceiveMemoryWarning {
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
 }
 
 /*

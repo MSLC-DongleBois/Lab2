@@ -20,6 +20,7 @@
 		B6BD9E5B1D6E46790009AB3F /* satisfaction.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = B6BD9E5A1D6E46790009AB3F /* satisfaction.mp3 */; };
 		B6BD9E641D6F4BA90009AB3F /* FFTHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = B6BD9E631D6F4BA90009AB3F /* FFTHelper.m */; };
 		D91DB8421F736B290007E96F /* DopplerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D91DB8411F736B290007E96F /* DopplerViewController.m */; };
+		D93584471F75AC71000A0D83 /* BrightnessViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D93584461F75AC71000A0D83 /* BrightnessViewController.m */; };
 		D97BFD551F758DEB001EA0B6 /* SMUGraphHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = D97BFD541F758DEB001EA0B6 /* SMUGraphHelper.m */; };
 /* End PBXBuildFile section */
 
@@ -66,6 +67,8 @@
 		B6BD9E631D6F4BA90009AB3F /* FFTHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FFTHelper.m; path = AudioDSPUtils/FFTHelper.m; sourceTree = "<group>"; };
 		D91DB8401F736B290007E96F /* DopplerViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DopplerViewController.h; sourceTree = "<group>"; };
 		D91DB8411F736B290007E96F /* DopplerViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DopplerViewController.m; sourceTree = "<group>"; };
+		D93584451F75AC71000A0D83 /* BrightnessViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BrightnessViewController.h; sourceTree = "<group>"; };
+		D93584461F75AC71000A0D83 /* BrightnessViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BrightnessViewController.m; sourceTree = "<group>"; };
 		D97BFD531F758DEB001EA0B6 /* SMUGraphHelper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SMUGraphHelper.h; sourceTree = "<group>"; };
 		D97BFD541F758DEB001EA0B6 /* SMUGraphHelper.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SMUGraphHelper.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -128,6 +131,8 @@
 				027CA7E41F6EFF40000714C3 /* FreqViewController.m */,
 				D91DB8401F736B290007E96F /* DopplerViewController.h */,
 				D91DB8411F736B290007E96F /* DopplerViewController.m */,
+				D93584451F75AC71000A0D83 /* BrightnessViewController.h */,
+				D93584461F75AC71000A0D83 /* BrightnessViewController.m */,
 				B6BD9E291D6E384A0009AB3F /* Assets.xcassets */,
 				B6BD9E2B1D6E384A0009AB3F /* LaunchScreen.storyboard */,
 				B6BD9E2E1D6E384A0009AB3F /* Info.plist */,
@@ -308,6 +313,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D93584471F75AC71000A0D83 /* BrightnessViewController.m in Sources */,
 				B6BD9E591D6E43140009AB3F /* CircularBuffer.m in Sources */,
 				B6BD9E641D6F4BA90009AB3F /* FFTHelper.m in Sources */,
 				D97BFD551F758DEB001EA0B6 /* SMUGraphHelper.m in Sources */,

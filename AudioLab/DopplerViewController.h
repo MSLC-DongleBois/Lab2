@@ -15,5 +15,6 @@
 @property (weak, nonatomic) IBOutlet UILabel *freqSliderLabel;
 
 @property (weak, nonatomic) IBOutlet UILabel *micFreqLabel;
+@property (weak, nonatomic) IBOutlet UILabel *gestureLabel;
 
 @end
