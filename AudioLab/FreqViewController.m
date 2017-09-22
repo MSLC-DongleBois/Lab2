@@ -92,7 +92,7 @@
     
     [self.audioManager play];
     
-    [NSTimer scheduledTimerWithTimeInterval:.5
+    [NSTimer scheduledTimerWithTimeInterval:.1
                                      target:self
                                    selector:@selector(continuousFFT:)
                                    userInfo:nil
@@ -116,64 +116,59 @@
     float* arrayData = malloc(sizeof(float)*BUFFER_SIZE);
     
     [self.buffer fetchFreshData:arrayData withNumSamples:BUFFER_SIZE];
-    
     [self.fftHelper performForwardFFTWithData:arrayData andCopydBMagnitudeToBuffer:fftMagnitude];
     
     float maxVal = 0.0;
     vDSP_Length indexLoc = 0;
+    
     vDSP_maxvi(fftMagnitude, 1, &maxVal, &indexLoc, BUFFER_SIZE/2);
     
-    //NSLog(@"%f", (((float)indexLoc) * self.audioManager.samplingRate/((float)BUFFER_SIZE)));
+    NSLog(@"%.2lu", indexLoc);
     
-    NSInteger peaks = 0;
-
-//    for (int i = 1; i < (BUFFER_SIZE/2) - 1; i++)
-//    {
-//        // here, we're checking for a center peak
-//        if (fftMagnitude[i] > fftMagnitude[i - 1] && fftMagnitude[i] > fftMagnitude[i + 1])
-//        {
-//            // if there are fewer than two peaks in the array, add a peak
-//            if (peaks < 2)
-//            {
-//                [self.magArray addObject:[NSNumber numberWithFloat:fftMagnitude[i]]];
-//                ++peaks;
-//            }
-//
-//            // once there are two peaks in the array, we have to see whether our current peak
-//            // is big enough to replace a peak in the array
-//            else
-//            {
-//                float smallestVal = FLT_MAX;
-//                int indexAt = -1;
-//                for (int j = 0; j < NUM_PEAKS; j++)
-//                {
-//                    // find the index of the smallest peak
-//                    if ([[self.magArray objectAtIndex:j] floatValue] < smallestVal)
-//                    {
-//                        smallestVal = [[self.magArray objectAtIndex:j] floatValue];
-//                        indexAt = j;
-//                    }
-//                }
-//
-//                // Check to see if our current peak is larger than the smallest value.
-//                if (fftMagnitude[i] > [[self.magArray objectAtIndex:indexAt] floatValue])
-//                {
-//                    // if it is, replace it.
-//                    //[self.magArray insertObject:[NSNumber numberWithFloat:fftMagnitude[i]] atIndex:indexAt];
-//                    [self.magArray replaceObjectAtIndex:indexAt withObject:[NSNumber numberWithFloat:fftMagnitude[i]]];
-//                }
-//
-//            }
-//        }
-//
-//    }
-
-    _Freq1Label.text = [NSString stringWithFormat:@"%.2f", (((float)indexLoc) * self.audioManager.samplingRate/((float)BUFFER_SIZE))];
-    _Freq2Label.text = [NSString stringWithFormat:@"%.2f", (((float)indexLoc) * self.audioManager.samplingRate/((float)BUFFER_SIZE))];
+    float currentMax = fftMagnitude[0];
+    float* maxValues = malloc(sizeof(float)*BUFFER_SIZE/2);
+    int idx1 = 0;
+    int idx2 = 0;
     
-//    _Freq1Label.text = [NSString stringWithFormat:@"%.2f", ([[self.magArray objectAtIndex:0] floatValue] * self.audioManager.samplingRate/((float)BUFFER_SIZE))];
-//
-//    _Freq2Label.text = [NSString stringWithFormat:@"%.2f", ([[self.magArray objectAtIndex:1] floatValue] * self.audioManager.samplingRate/((float)BUFFER_SIZE))];
+    // window value of 3
+    for (int i = 1; i < ((BUFFER_SIZE/2) - 1); i++) {
+        if (fftMagnitude[i] > currentMax && fftMagnitude[i-1] < fftMagnitude[i] && fftMagnitude[i+1] < fftMagnitude[i]) {
+            currentMax = fftMagnitude[i];
+            maxValues[i] = currentMax;
+            idx1 = i;
+        }
+    }
+    
+    currentMax = fftMagnitude[0];
+    
+    // window value of 3
+    for (int i = 1; i < ((BUFFER_SIZE)/2) - 1; i++) {
+        if (fftMagnitude[i] > currentMax && fftMagnitude[i-1] < fftMagnitude[i] && fftMagnitude[i+1] < fftMagnitude[i]) {
+            int poss = i;
+            if (poss != idx1) {
+                currentMax = fftMagnitude[i];
+                maxValues[i] = currentMax;
+                idx2 = poss;
+            }
+        }
+    }
+    
+    float buff = (float)BUFFER_SIZE;
+    float rate = (float)self.audioManager.samplingRate;
+    
+    float first, second;
+    
+    first = ((idx1 * rate)/buff);
+    second = ((idx2 * rate)/buff);
+    
+    NSLog(@"first peak: %f", first);
+    NSLog(@"second peak: %f", second);
+    
+//    _Freq1Label.text = [NSString stringWithFormat:@"%.2f", (((float)indexLoc) * self.audioManager.samplingRate/((float)BUFFER_SIZE))];
+//    _Freq2Label.text = [NSString stringWithFormat:@"%.2f", (((float)indexLoc) * self.audioManager.samplingRate/((float)BUFFER_SIZE))];
+    
+    _Freq1Label.text = [NSString stringWithFormat:@"%.2f", first];
+    _Freq2Label.text = [NSString stringWithFormat:@"%.2f", second];
     
     free(arrayData);
     free(fftMagnitude);
